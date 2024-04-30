@@ -1,0 +1,125 @@
+/* General Styles starts*/
+:root{
+    /*Basic colors*/
+    --midnight-green: hsl(195, 83%, 16%);
+    --blue-NCS: hsl(195, 83%, 38%);    
+    --caribbean-green: #06d6a0;
+    --yellow-crayola: #ffd166;
+    --paradise-pink: #ef476f; 
+    /*Basic colors*/
+
+    /*Basic colors*/
+    --section01-normal: hsl(195, 83%, 16%);
+    --section02-normal: hsl(195, 83%, 38%);    
+    --section03-normal: hsl(164, 95%, 43%);
+    --section04-normal: #ffd166;
+    --section05-normal: #ef476f; 
+    /*Basic colors*/
+
+    /*light colors light to the 90% */
+    --section01-light: hsl(193, 80%, 90%);
+    --section02-light: hsl(195, 85%, 95%);
+    --section03-light: hsl(164, 96%, 95%);
+    --section04-light: hsl(42, 100%, 95%);
+    --section05-light: hsl(346, 84%, 95%); 
+    /*light colors light to the 90% */
+
+    /*dark colors light to the 10% */
+    --section01-dark: hsl(193, 80%, 10%);
+    --section02-dark: hsl(195, 84%, 10%);
+    --section02-darker: hsl(195, 84%, 2%);
+    --section03-dark: hsl(164, 96%, 10%);
+    --section04-dark: hsl(42, 100%, 10%);
+    --section05-dark: hsl(346, 84%, 10%); 
+    /*dark colors light to the 10% */
+
+
+    --blue-NCS-transparent: rgba(17, 138, 178, 0.9);
+    --gray-light: #eeeeee;
+    --ff-titles: 
+}
+*,
+*::after,
+*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    width: 100vw;    
+  }
+
+body{        
+    display: flex;  
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: 'Courier Prime', monospace;     
+    background-color: var(--section02-darker);
+}
+
+.icon{
+    font-size: 1.4em;    
+}
+
+.icon-img-format{
+    width: 50px;
+    height: 50px;
+}
+.color-light{
+    color: #fff!important;
+}
+
+.btn{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.8em;
+    background-color: rgba(5, 37, 46, 0.1);    
+    color: #000; 
+    border: rgb(5, 37, 46) solid 2px; ;   
+    border-radius: 5px;
+    transition: background-color 0.25s ease-in-out;
+    cursor: pointer;
+}
+.btn:hover{
+    background-color: rgba(5, 37, 46, 0.4);
+    color: var(--section01-light);
+    transition: background-color 0.25s ease-in-out;
+}
+
+.breadcrumb {
+    padding-left: 4rem;
+}
+
+.breadcrumb ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 0.5em;
+    margin: 0em 0 1em 0em ;
+    padding: 2em 0 0 0 ;    
+}
+
+.breadcrumb li{
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1em;    
+}
+.breadcrumb a {
+    color: var(--section01-normal);
+}
+    
+.breadcrumb li:not(:last-child)::after {
+    display: inline-block;
+    margin: 0 .25rem;
+    content: "→";
+}
+
+
+/* General Styles ends*/
