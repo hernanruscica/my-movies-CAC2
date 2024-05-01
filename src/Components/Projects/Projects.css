@@ -6,6 +6,7 @@ RECENT PROJECTS container starts
     padding: 0em 1.2em;  
 }
 
+
 .projects{
     flex-direction: column;    
     background-color: var(--section04-light);    
