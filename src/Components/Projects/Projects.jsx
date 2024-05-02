@@ -14,7 +14,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try{
-        const response = await axios.get('https://ruscica-code.ar/wordpress_ruscicacodear/wp-json/wp/v2/posts');
+        const response = await axios.get('https://ruscica-code.ar/wordpress_ruscicacodear/wp-json/wp/v2/project');
         setProjects(response.data);
         setError(null);        
       }catch(error){
@@ -31,13 +31,14 @@ const Projects = () => {
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
   const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
 
+console.log(currentProjects);
   // Cambiar página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   // Filtrar proyectos
-  const filteredProjects = currentProjects.filter((project) =>
-    project.title.rendered.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredProjects = currentProjects.filter((project) =>
+  //   project.acf.project_title.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   if (loading) {
     return <div>Cargando...</div>;
@@ -92,7 +93,7 @@ console.log(projects);
       />
       <section className="project">
         <div className="recentprojects__container" id="projects_container">
-      {filteredProjects.map((project) => (      
+      {currentProjects.map((project) => (      
             <div className="recentprojects-project"  key={project.id}>
               <div className="recentprojects-project__img-container">
                 <img
@@ -110,7 +111,7 @@ console.log(projects);
 
               <div className="recentprojects-project-info">
                 <h3 className="recentprojects-project-info__title">
-                {project.title.rendered}
+                {project.acf.project_title}
                 </h3>
                 <div className="recentprojects-project-info__tags-container">
                   <span className="tecnology-tag">DOM</span>
