@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './Projects.css';
-import {fetchProjectsData} from '../utils/fetchsAxios.js';
+import {fetchProjectsData, fetchTagsData} from '../utils/fetchsAxios.js';
 
 const Projects = () => {
 
@@ -11,13 +11,16 @@ const Projects = () => {
   const [projectsPerPage, setProjectsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');    
   const [searchTag, setSearchTag] = useState('');  
+  const [tags, setTags] = useState([]);
+  const [searchOrder, setSearchOrder] = useState('oldest');
 
   useEffect(() => {
     const fetchProjects = async () => {
       try{
-        const projectsData = await fetchProjectsData();
-        
+        const projectsData = await fetchProjectsData();        
         setProjects(projectsData);
+        const tags = await fetchTagsData();
+        setTags(tags);
         setError(null);        
       }catch(error){
         setError('Error al obtener el proyecto');
@@ -25,8 +28,11 @@ const Projects = () => {
       }
       setLoading(false);
     };
-    fetchProjects();           
+    
+    fetchProjects();    
+          
   }, []);   
+  
   
   console.log(projects);
   // Obtener proyectos actuales
@@ -42,10 +48,21 @@ const Projects = () => {
   const projectsFiltered = currentProjects.filter((project) => {
     const titleMatch = project.title.rendered.toLowerCase().includes(searchTerm.toLowerCase());
     const tagsMatch = project.acf.tags.some(tag => tag.toLowerCase().includes(searchTag));
-  
-    return titleMatch || tagsMatch;
+    
+    if (searchTerm == '' && searchTag != '') return titleMatch && tagsMatch;
+    if (searchTerm == '' && searchTag == '') return titleMatch || tagsMatch;
+    if (searchTerm != '' && searchTag == '') return titleMatch && tagsMatch;
+    if (searchTerm != '' && searchTag != '') return titleMatch && tagsMatch;
+
   });
-  
+
+  projectsFiltered.sort((a, b) => {
+    // Convertir las fechas a objetos Date para compararlas
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    // Compara las fechas y devuelve -1 si dateA es anterior a dateB, 1 si es posterior, o 0 si son iguales
+    return (searchOrder == 'oldest') ? dateA - dateB : dateB - dateA;
+  });
 
 
   if (loading) {
@@ -55,7 +72,7 @@ const Projects = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-//console.log(projectsFiltered);
+//console.log(projectsSorted);
   return (
     <>
       <a href="#" className="btn btn-floating top_arrow" id="top_arrow">
@@ -92,20 +109,50 @@ const Projects = () => {
           </ul>
         </nav>
       
-      {/* Barra de busqueda, filtrado y orden */}
-        <input
-        type="text"
-        placeholder="Buscar proyectos..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder={searchTag}
-        value={searchTag}       
-        onChange={(e) => setSearchTag(e.target.value)} 
-      />
+      
       <section className="project">
+
+        {/* Barra de busqueda, filtrado y orden */}
+        <div className="project__searchbar__container">
+          <input className="project__searchbar__container__input_text"
+            type="text"
+            placeholder="Buscar proyectos..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <select
+            className="project__searchbar__container__input_combo"
+            value={searchTag}
+            onChange={(e) => setSearchTag(e.target.value)}
+          >            
+            <option value="">Etiqueta: Ninguna</option>
+            {tags.map((tag) => (
+              <option key={tag.id} value={tag.name}>{tag.name}</option>
+            ))}
+          </select>
+          <div>
+            <label>
+              <input className="project__searchbar__container__input_checkbox"
+                type="checkbox"
+                value="newest"
+                checked={searchOrder === 'newest'} // Verifica si la opción más reciente está seleccionada
+                onChange={(e) => setSearchOrder(e.target.value)}
+              />
+              Más recientes
+            </label>
+            <label>
+              <input className="project__searchbar__container__input_checkbox"
+                type="checkbox"
+                value="oldest"
+                checked={searchOrder === 'oldest'} // Verifica si la opción más antigua está seleccionada
+                onChange={(e) => setSearchOrder(e.target.value)}
+              />
+              Más antiguos
+            </label>
+          </div>
+
+        </div>
+        
         <div className="recentprojects__container" id="projects_container">
       {projectsFiltered.map((project) => (      
              <div className="recentprojects-project" key={project.id}>

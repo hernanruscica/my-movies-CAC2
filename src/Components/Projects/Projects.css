@@ -109,6 +109,49 @@ RECENT PROJECTS container starts
 }
 }
 
+
+
+.project__searchbar__container{
+      
+    display: flex;    
+    flex-direction: column;
+    flex-wrap: wrap;    
+}
+
+.project__searchbar__container__input_text,
+.project__searchbar__container__input_combo {  
+    background-color: rgba(5, 37, 46, 0.1);
+    border-radius: 5px;
+    font-family: 'Courier Prime', monospace;     
+    font-size: 1rem;
+    padding: 0.6em;
+    margin: 0.2em 0;
+}
+
+.project__searchbar__container__input_checkbox{
+    background-color: none;
+    margin: 1em;
+}
+
+@media (min-width: 1000px){
+    .project__searchbar__container{
+        flex-direction: row;
+        justify-content: left;
+        padding: 0 4em;
+        margin: 2em 0;
+    }
+    .project__searchbar__container *{
+       width: 32%;
+       margin: 0.2em;
+    }    
+}
+
+
+
+.project__input_text {
+    
+}
+
 /*******************************
 RECENT PROJECTS container ends
 *************************/
