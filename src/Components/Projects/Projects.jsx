@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
 import './Projects.css';
-import {fetchMedia} from '../utils/fetchMedia.js';
+import {fetchProjectsData} from '../utils/fetchsAxios.js';
 
 const Projects = () => {
 
@@ -10,42 +9,15 @@ const Projects = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [projectsPerPage, setProjectsPerPage] = useState(10);
-  const [searchTerm, setSearchTerm] = useState('');  
+  const [searchTerm, setSearchTerm] = useState('');    
+  const [searchTag, setSearchTag] = useState('');  
 
   useEffect(() => {
     const fetchProjects = async () => {
       try{
-        const response = await axios.get('https://ruscica-code.ar/wordpress_ruscicacodear/wp-json/wp/v2/project');
-
-        const responseTags = await fetch('https://ruscica-code.ar/wordpress_ruscicacodear/wp-json/wp/v2/tags');
-        const tagsData = await responseTags.json();
-        const tagsDataFiltered = tagsData.map((tagsData) => {return {id: tagsData.id, name: tagsData.name}});
-        //console.log(tagsDataFiltered);
-
-        const updatedProjects = await Promise.all(
-          response.data.map(async (project) => {
-            if (project.acf ) {
-              const {image, image02, image03 } = project.acf; 
-              const imageDataResponse = await axios.get(`https://ruscica-code.ar/wordpress_ruscicacodear/wp-json/wp/v2/media/${image}`);
-              if (imageDataResponse.data) project.acf.image = imageDataResponse.data.source_url;                              
-              const imageDataResponse02 = await axios.get(`https://ruscica-code.ar/wordpress_ruscicacodear/wp-json/wp/v2/media/${image02}`);
-              if (imageDataResponse02.data) project.acf.image02 = imageDataResponse02.data.source_url;                              
-              const imageDataResponse03 = await axios.get(`https://ruscica-code.ar/wordpress_ruscicacodear/wp-json/wp/v2/media/${image03}`);
-              if (imageDataResponse03.data) project.acf.image03 = imageDataResponse03.data.source_url;
-              
-
-              // Reemplazar IDs de tags por nombres
-              const tagNames = project.acf.tags.map(tagId => {
-                const tag = tagsDataFiltered.find(tag => tag.id === tagId);
-                return tag ? tag.name : null; // Si el tag no se encuentra, retorna null
-              });
-
-              project.acf.tags = tagNames.filter(tagName => tagName !== null); // Filtrar tags null (no encontrados)
-
-            }
-            return project;
-          }));
-        setProjects(updatedProjects);
+        const projectsData = await fetchProjectsData();
+        
+        setProjects(projectsData);
         setError(null);        
       }catch(error){
         setError('Error al obtener el proyecto');
@@ -67,9 +39,13 @@ const Projects = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   //Filtrar proyectos por el titulo, devuelvo los proyectos que tienen el titulo coincidente.
-  const projectsFiltered = currentProjects.filter((project) => (
-     project.title.rendered.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  const projectsFiltered = currentProjects.filter((project) => {
+    const titleMatch = project.title.rendered.toLowerCase().includes(searchTerm.toLowerCase());
+    const tagsMatch = project.acf.tags.some(tag => tag.toLowerCase().includes(searchTag));
+  
+    return titleMatch || tagsMatch;
+  });
+  
 
 
   if (loading) {
@@ -123,6 +99,12 @@ const Projects = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+      <input
+        type="text"
+        placeholder={searchTag}
+        value={searchTag}       
+        onChange={(e) => setSearchTag(e.target.value)} 
+      />
       <section className="project">
         <div className="recentprojects__container" id="projects_container">
       {projectsFiltered.map((project) => (      
@@ -130,7 +112,7 @@ const Projects = () => {
               <div className="recentprojects-project__img-container">
                 <img
                   className="recentprojects-project__img-container__img"
-                  src={project.acf.image}
+                  src={project.acf.image02}
                   alt="captura de Juego de memoria 'Memotest"
                 />
                 <a
@@ -148,8 +130,14 @@ const Projects = () => {
                 </h3>
                 <div className="recentprojects-project-info__tags-container">
 
-                  {project.acf.tags.map((tag) => (
-                    <span className="tecnology-tag">{tag}</span>
+                  {project.acf.tags.map((tag, index) => (
+                    <span
+                    key={index} // Asegúrate de incluir una key única para cada elemento en un array renderizado
+                    className="tecnology-tag"
+                    onClick={() => setSearchTag(tag)} // Establece el estado searchTag al nombre del tag al hacer clic
+                  >
+                    {tag}
+                  </span>
                   ))
                   }
 
