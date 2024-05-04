@@ -1,12 +1,12 @@
 import React from 'react'
 
-export const Home = () => {
+export const Links = () => {
   return (
     <section>
-      <h1>Home</h1>
+      <h1>Links</h1>
       {/* Agrega aquí tu información personal y descripción */}
     </section>
   )
 }
 
-export default Home;
+export default Links;

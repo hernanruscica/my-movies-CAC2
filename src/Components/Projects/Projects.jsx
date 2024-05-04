@@ -34,7 +34,7 @@ const Projects = () => {
   }, []);   
   
   
-  console.log(projects);
+  //console.log(projects);
   // Obtener proyectos actuales
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
