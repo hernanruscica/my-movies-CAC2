@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './Projects.css';
 import {fetchProjectsData, fetchTagsData} from '../utils/fetchsAxios.js';
+import Card from '../Card/Card.jsx';
 
 const Projects = () => {
 
@@ -8,7 +9,7 @@ const Projects = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [projectsPerPage, setProjectsPerPage] = useState(10);
+  const [projectsPerPage, setProjectsPerPage] = useState(3);
   const [searchTerm, setSearchTerm] = useState('');    
   const [searchTag, setSearchTag] = useState('');  
   const [tags, setTags] = useState([]);
@@ -38,14 +39,14 @@ const Projects = () => {
   // Obtener proyectos actuales
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-  const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
+  
+  
 
+  
 
-  // Cambiar página
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   //Filtrar proyectos por el titulo, devuelvo los proyectos que tienen el titulo coincidente.
-  const projectsFiltered = currentProjects.filter((project) => {
+  const projectsFiltered = projects.filter((project) => {
     const titleMatch = project.title.rendered.toLowerCase().includes(searchTerm.toLowerCase());
     const tagsMatch = project.acf.tags.some(tag => tag.toLowerCase().includes(searchTag));
     
@@ -64,6 +65,8 @@ const Projects = () => {
     return (searchOrder == 'oldest') ? dateA - dateB : dateB - dateA;
   });
 
+  const currentProjects = projectsFiltered.slice(indexOfFirstProject, indexOfLastProject);
+  const totalPages =  Math.ceil(projectsFiltered.length / projectsPerPage);
 
   if (loading) {
     return <div>Cargando...</div>;
@@ -112,18 +115,24 @@ const Projects = () => {
       
       <section className="project">
 
-        {/* Barra de busqueda, filtrado y orden */}
+        {/*searchBar, filter, order and pagination STARTS */}
         <div className="project__searchbar__container">
           <input className="project__searchbar__container__input_text"
             type="text"
             placeholder="Buscar proyectos..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1);
+              }}
           />
           <select
             className="project__searchbar__container__input_combo"
             value={searchTag}
-            onChange={(e) => setSearchTag(e.target.value)}
+            onChange={(e) => {
+                setSearchTag(e.target.value);
+                setCurrentPage(1);
+              }}
           >            
             <option value="">Etiqueta: Ninguna</option>
             {tags.map((tag) => (
@@ -136,7 +145,10 @@ const Projects = () => {
                 type="checkbox"
                 value="newest"
                 checked={searchOrder === 'newest'} // Verifica si la opción más reciente está seleccionada
-                onChange={(e) => setSearchOrder(e.target.value)}
+                onChange={(e) => {
+                  setSearchOrder(e.target.value);
+                  setCurrentPage(1);
+                }}
               />
               Más recientes
             </label>
@@ -150,47 +162,34 @@ const Projects = () => {
               Más antiguos
             </label>
           </div>
-
+          <div>
+            Paginas: 
+            {/* <span>Página actual: {currentPage}</span> */}
+            { Array.from({ length: totalPages }, (_, index) => {                
+                return (<span key={index + 1} 
+                        style={{
+                          fontWeight: currentPage === index + 1 ? 'bold' : 'normal',
+                          textDecoration: currentPage === index + 1 ? 'none' : 'underline',
+                          cursor: currentPage === index + 1 ? 'default' : 'pointer',
+                          fontSize: currentPage === index + 1 ? '1.6em' : '1.2em', // Tamaño mayor para la página actual
+                        }}                        
+                        onClick={() => setCurrentPage(index + 1)}>
+                  {index + 1}
+                </span>)
+               })
+            }           
+          </div>
         </div>
+        {/*searchBar, filter, order and pagination ENDS */}
         
         <div className="recentprojects__container" id="projects_container">
-      {projectsFiltered.map((project) => (      
-             <div className="recentprojects-project" key={project.id}>
-              <div className="recentprojects-project__img-container">
-                <img
-                  className="recentprojects-project__img-container__img"
-                  src={project.acf.image02}
-                  alt="captura de Juego de memoria 'Memotest"
-                />
-                <a
-                  href={"/projects/" + project.id}
-                  className="btn recentprojects-project__btn"
-                >
-                  Ver más
-                </a>
-              </div>
-
-              <div className="recentprojects-project-info">
-                <h3 className="recentprojects-project-info__title">
-                {project.acf.project_title}
-                
-                </h3>
-                <div className="recentprojects-project-info__tags-container">
-
-                  {project.acf.tags.map((tag, index) => (
-                    <span
-                    key={index} // Asegúrate de incluir una key única para cada elemento en un array renderizado
-                    className="tecnology-tag"
-                    onClick={() => setSearchTag(tag)} // Establece el estado searchTag al nombre del tag al hacer clic
-                  >
-                    {tag}
-                  </span>
-                  ))
-                  }
-
-                </div>
-              </div>
-            </div>               
+          {currentProjects.map((project, index) => (     
+            //linkUrl, id, img, title, tags, setSearchTag, date
+            <div key={index}>
+            <Card linkUrl = 'projects' id = {project.id} img = {project.acf.image02} 
+                  title = {project.acf.project_title} tags = {project.acf.tags} 
+                  setSearchTag = {setSearchTag} date = {project.date} />              
+            </div>            
       ))}
           </div>
         </section>  

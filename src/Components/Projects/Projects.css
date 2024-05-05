@@ -79,8 +79,16 @@ RECENT PROJECTS container starts
     font-size: 0.8em;
     padding: 0.6em 0.8em;    
     border-radius: 10px;
+    border: var(--section02-light) 2px solid;
     background-color: var(--section02-dark);
     color: var(--section02-light);
+    cursor: pointer;
+    transition: all ease-in-out 0.25s ;
+}
+.tecnology-tag:hover{
+    background-color: var(--section02-light);
+    color: var(--section02-dark);
+    border: var(--section02-dark) 2px solid;
 }
 
 .recentprojects-project__btn{
