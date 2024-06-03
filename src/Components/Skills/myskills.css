@@ -1,0 +1,60 @@
+/*Myskills starts*/
+
+.myskills{
+    background-color: var(--section03-light);
+    flex-direction: column-reverse;
+    padding: 0em 1.2em;
+}
+
+.myskills-main {
+    background-color: var(--section03-light);
+}
+
+.myskills__section{
+    
+}
+/*Slider con las tecnologias*/
+.myskills_showcase{
+    background-color: #fff;
+    padding: 2em;    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1.5em;
+    align-items: center;
+    flex-wrap: nowrap;    
+    border: none;
+    border-top: var(--section04-dark) solid 1px;
+    border-bottom: var(--section04-dark) solid 1px;
+    overflow-x: auto;    
+}
+
+.myskills__section__icon{
+    width: 40px;
+}
+
+.myskills_showcase_image{
+    width: 50px;   
+    height: auto;
+    color: #06d6a0;
+}
+.myskills_showcase_image:hover{
+    
+    /*border-bottom: solid 4px var(--midnight-green);    */
+    transform: scale(1.05);
+    
+}
+
+@media (min-width: 800px){
+    .myskills{
+        flex-direction: row;
+    }
+    .myskills_showcase{
+        flex-wrap: wrap;        
+        border: none;
+        border-left: var(--section04-dark) solid 1px;
+        border-right: var(--section04-dark) solid 1px;
+    }
+}
+
+/*Myskills ends*/

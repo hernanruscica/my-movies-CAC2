@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import { UserContext } from '../../Contexts/UserProvider';
 
+
 export const Header = () => {
   const currentUserContext = useContext(UserContext);    
-  const currentPage = currentUserContext.currentPage[0];
+  const currentPage = currentUserContext.currentPage[0];  
   const onPageChange = currentUserContext.currentPage[1];
+  const currentLanguage = currentUserContext.currentLanguage[0];
+  const onLanguageChange = currentUserContext.currentLanguage[1];
 
   //console.log(currentPage);
     const isActive = (pageName) => {
@@ -17,6 +20,10 @@ export const Header = () => {
       document.getElementById("menu-toggle").click();
       onPageChange(pageName);
     };
+    const handleLanguageChange = (e) => {
+      console.log(`Selected language: ${e.target.value}`);
+      onLanguageChange(e.target.value);
+    }
     return (
       <header className="header" id="header">
         <div className="header-container">
@@ -27,7 +34,7 @@ export const Header = () => {
               src="./assets/icons/fontawesome-custom/code-light.svg"
               className="header__logo-container__icon"
               alt="Icono en formato svg de codigo"
-              style={{ width: "30px" }}
+              style={{ width: "25px" }}
             />
             <h1 className="header__logo-container__title">
               <span style={{ color: "var(--section04-normal)" }}>ruscica</span>
@@ -65,7 +72,7 @@ export const Header = () => {
                   )}`}
                   id="myskills_mobile_navbar_link"
                   onClick={() => handleNavbarClick("about")}>
-                    <span >Sobre_mi</span>
+                    <span >{currentLanguage == 'esp' ? 'Sobre mí' : 'About me'}</span>
                   </Link>                  
               </li>
               <li className="header__navbar-mobile__list__item">
@@ -77,7 +84,7 @@ export const Header = () => {
                   id="myskills_mobile_navbar_link"
                   onClick={() => handleNavbarClick("skills")}
                 >
-                  Habilidades
+                  {currentLanguage == 'esp' ? 'Habilidades' : 'Skills'}
                 </Link>
               </li>
               <li className="header__navbar-mobile__list__item">
@@ -89,7 +96,7 @@ export const Header = () => {
                   id="recentprojects_mobile_navbar_link"
                   onClick={() => handleNavbarClick("projects")}
                 >
-                  Proyectos
+                  {currentLanguage == 'esp' ? 'Proyectos' : 'Projects'}
                 </Link>
               </li>
               <li className="header__navbar-mobile__list__item">
@@ -99,7 +106,7 @@ export const Header = () => {
                   id="myLinks_mobile_navbar_link"
                   onClick={() => handleNavbarClick("links")}
                 >
-                  Enlaces
+                  {currentLanguage == 'esp' ? 'Enlaces' : 'Links'}
                 </Link>
               </li>
               <li className="header__navbar-mobile__list__item">
@@ -111,8 +118,28 @@ export const Header = () => {
                   id="contactme_mobile_navbar_link"
                   onClick={() => handleNavbarClick("contact")}
                 >
-                  Contacto
+                  {currentLanguage == 'esp' ? 'Contactarme' : 'Contact me'}
                 </Link>
+              </li>
+              <li className="header__navbar-mobile__list__item language-sel-container">
+                <label htmlFor="languageSelect">
+                {currentLanguage == 'esp' ? (<img className = "language-sel-container__img"
+                    src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg"
+                    alt="Spain Flag"                    
+                  />) : (<img className = "language-sel-container__img"
+                    src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg"
+                    alt="UK Flag"                    
+                  />)}                  
+                </label>
+                {/* <span>
+                    {currentLanguage == 'esp' ? 'CHANGE:' : 'CAMBIAR:'}
+                  </span> */}
+                <select className="language-sel-container__select" defaultValue={currentLanguage} name="languageSelect" id="languageSelect" onChange={(event) => handleLanguageChange(event)}>                  
+                  <option value="eng" >
+                    English 
+                  </option>
+                  <option value="esp" >Español</option>                  
+                </select>
               </li>
               <li
                 className="header__navbar-mobile__list__item"
@@ -161,7 +188,9 @@ export const Header = () => {
                   />
                 </Link>
               </li>
-            </ul>
+            
+            
+            </ul>            
           </nav>
         </div>
       </header>

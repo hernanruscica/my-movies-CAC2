@@ -15,7 +15,7 @@ Header starts
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 1.2em 1em;            
+            padding: 1.2em 2em 1.2em 1em;            
         }
 
         .header-container{
@@ -25,15 +25,16 @@ Header starts
             justify-content: space-between;
             height: 3em;
             width: 100%;
+            max-width: 1000px;
         }
 
         .header__logo-container__title{
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.2em;    
+            font-size: 1em;    
             text-align: center;
             text-transform: uppercase;
             margin-left: 0.5em;
-            width: 200px;
+            width:max-content;
         }
 
         .header_navbar-mobile_social{
@@ -61,8 +62,7 @@ Header starts
             flex-direction: column;
             align-items: center;            
             top: -100%;
-            left: 0;
-            padding-top: 1rem;
+            left: 0;            
             background-color: var(--section01-normal);
             opacity: 0.8;
             width: 100vw;
@@ -81,7 +81,8 @@ Header starts
                  
         
         #header__btn-menu-close{                    
-            margin-left: 85vw;
+            margin-left: 78vw;
+            margin-top: 2vh;
         }
         
         .header__navbar-mobile__list{   
@@ -92,11 +93,31 @@ Header starts
             gap: 0.6rem;
             list-style: none; 
         }
+
+        .language-sel-container{            
+            
+            font-size: 1.4em;   
+            display: flex;         
+            align-items: flex-start;
+        }
+
+        .language-sel-container__img{ 
+            width: 50px;
+            margin-right: 5px;
+         }
+
+        .language-sel-container__select{            
+            font-size: 0.8em;            
+            padding: 0.1em 0.2em;
+            margin-left: 0em;
+        }
+
         .header__navbar-mobile__list__item{
             text-align: center;
             width: 100%;                        
             border-bottom: var(--section01-light) solid 2px;   
             padding-bottom: 0.5em;
+            white-space: nowrap
         }
 
         .header__navbar-mobile__list__item:last-child{
@@ -105,7 +126,7 @@ Header starts
 
         .header__navbar-mobile__link{
             text-decoration: none;
-            font-size: 1.2em;                
+            font-size: 1.0em;                
             font-family: 'Montserrat', sans-serif;;
             text-transform: uppercase;
             color: var(--section01-light);
@@ -115,30 +136,56 @@ Header starts
         .navbar-selected{
           color: var(--section03-normal) ;          
       }
+
+      #social__links__navbar {
+        display: flex;
+        justify-content: space-around;
+    }
       
         @media (min-width: 768px){
             
+
             
             #header__btn-menu-open{
                 display: none;
             }
+
+            .header-container{
+                width: 100%;
+                max-width: 1000px;
+                align-items: center;
+            }
+
             .header__navbar{                          
                position: static;     
                transition: none;                   
-               justify-content: center;                                  
+               justify-content: center;   
+               align-items: flex-end;                               
             }   
             #header__btn-menu-close{
                 display: none;                
             }       
             
             .header__navbar-mobile__list{
-            width: 50%;                
+            width: fit-content;                
             flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5em;
-            padding-right: 4em;
+            justify-content: space-between; 
+            /* align-items: flex-end; */
+            gap: 0.7em;          
+            
         }
+
+        .language-sel-container__select{            
+            font-size: 1em;            
+            padding: 0.2em 0.2em;
+            margin-left: 0.4em;
+        }
+        .language-sel-container__img{ 
+            width: 35px;
+            margin-right: 2px;
+         }
+        
+
         .header__navbar-mobile__list__item{
             font-size: 0.8em;
             border-bottom: none;     
@@ -155,10 +202,7 @@ Header starts
       .header__navbar-mobile__link{
         padding: 0.2em;
       }
-      .header-container{
-        width: 1000px;
-
-      }
+      
             
         }
         /*header and navbar ends*/
