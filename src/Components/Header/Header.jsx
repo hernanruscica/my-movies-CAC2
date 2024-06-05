@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react'
 import { Link } from 'react-router-dom';
 import './Header.css';
 import { UserContext } from '../../Contexts/UserProvider';
+import { BASE_URL } from '../../config';
 
 
 export const Header = () => {
@@ -31,7 +32,7 @@ export const Header = () => {
                   onClick={() => handleNavbarClick("about")}
           >
             <img
-              src="./assets/icons/fontawesome-custom/code-light.svg"
+              src={`${BASE_URL}/assets/icons/fontawesome-custom/code-light.svg`}
               className="header__logo-container__icon"
               alt="Icono en formato svg de codigo"
               style={{ width: "25px" }}
@@ -46,7 +47,7 @@ export const Header = () => {
           <input type="checkbox" id="menu-toggle" />
           <label htmlFor="menu-toggle" className="checkbtn">
             <img
-              src="./assets/icons/fontawesome-custom/bars-light.svg"
+              src = {`${BASE_URL}/assets/icons/fontawesome-custom/bars-light.svg`}
               className="header__logo-container__icon"
               id="header__btn-menu-open"
               style={{ width: "20px" }}
@@ -57,7 +58,7 @@ export const Header = () => {
           <nav className="header__navbar" id="header__navbar">
             <label htmlFor="menu-toggle" className="checkbtn">
               <img
-                src="./assets/icons/fontawesome-custom/xmark-light.svg"
+                src={`${BASE_URL}/assets/icons/fontawesome-custom/xmark-light.svg`}
                 className="header__logo-container__icon"
                 id="header__btn-menu-close"
                 style={{ width: "20px" }}
@@ -153,7 +154,7 @@ export const Header = () => {
                   rel="noopener noreferrer"
                 >
                   <img
-                    src="./assets/icons/fontawesome-custom/github-light.svg"
+                    src={`${BASE_URL}/assets/icons/fontawesome-custom/github-light.svg`}
                     alt="icono de github"
                     style={{ width: "30px" }}
                     className="header_navbar-mobile_social"
@@ -167,7 +168,7 @@ export const Header = () => {
                   rel="noopener noreferrer"
                 >
                   <img
-                    src="./assets/icons/fontawesome-custom/envelope-light.svg"
+                    src={`${BASE_URL}/assets/icons/fontawesome-custom/envelope-light.svg`}
                     alt="icono de correo electronico"
                     style={{ width: "30px" }}
                     className="header_navbar-mobile_social"
@@ -181,7 +182,7 @@ export const Header = () => {
                   rel="noopener noreferrer"
                 >
                   <img
-                    src="./assets/icons/fontawesome-custom/whatsapp-light.svg"
+                    src={`${BASE_URL}/assets/icons/fontawesome-custom/whatsapp-light.svg`}
                     alt="icono de whatsapp"
                     style={{ width: "30px" }}
                     className="header_navbar-mobile_social"

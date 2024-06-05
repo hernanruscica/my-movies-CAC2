@@ -1,5 +1,7 @@
 import React from 'react';
 import './Footer.css';
+import { BASE_URL } from '../../config';
+
 
 const Footer = () => {
   return (
@@ -16,7 +18,7 @@ const Footer = () => {
               aria-label="Mi perfil de Github"
             >
               <img
-                src="./assets/icons/fontawesome-custom/github-light.svg"
+                src={`${BASE_URL}/assets/icons/fontawesome-custom/github-light.svg`}
                 className="header_navbar-mobile_social"
                 style={{ width: '30px' }}
                 alt="icono de github"
@@ -30,7 +32,7 @@ const Footer = () => {
               aria-label="Mi perfil de Linkedin"
             >
               <img
-                src="./assets/icons/fontawesome-custom/linkedin-light.svg"
+                src={`${BASE_URL}/assets/icons/fontawesome-custom/linkedin-light.svg`}
                 className="header_navbar-mobile_social"
                 style={{ width: '30px' }}
                 alt="icono de linkedin"
@@ -44,7 +46,7 @@ const Footer = () => {
               aria-label="Mi perfil de Free Code Camp"
             >
               <img
-                src="./assets/icons/fontawesome-custom/free-code-camp-light.svg"
+                src={`${BASE_URL}/assets/icons/fontawesome-custom/free-code-camp-light.svg`}
                 className="header_navbar-mobile_social"
                 style={{ width: '30px' }}
                 alt="icono de Free Code Camp"
@@ -61,7 +63,7 @@ const Footer = () => {
               aria-label="Mi correo electronico"
             >
               <img
-                src="./assets/icons/fontawesome-custom/envelope-light.svg"
+                src={`${BASE_URL}/assets/icons/fontawesome-custom/envelope-light.svg`}
                 className="header_navbar-mobile_social"
                 alt="icono de correo electrónico"
               />
@@ -74,7 +76,7 @@ const Footer = () => {
               rel="noopener noreferrer"
             >
               <img
-                src="./assets/icons/fontawesome-custom/whatsapp-light.svg"
+                src={`${BASE_URL}/assets/icons/fontawesome-custom/whatsapp-light.svg`}
                 className="header_navbar-mobile_social"
                 alt="icono de WhatsApp"
               />
