@@ -2,7 +2,9 @@ import React, {useState, useEffect, useContext} from 'react';
 import { UserContext } from '../../Contexts/UserProvider';
 import { Link } from 'react-router-dom';
 import './Projects.css';
-import './slider.css';
+import { BASE_URL } from '../../config';
+import  ProjectSlider  from '../Sliders/ProjectSlider.jsx';
+
 
 // import {fetchProjectsData, fetchTagsData} from '../utils/fetchsAxios.js';
 // import Card from '../Card/Card.jsx';
@@ -13,6 +15,13 @@ const ViewProject = (props) => {
     const currentUserContext = useContext(UserContext);  
     const {id, projectName} = props;
     const currentLanguage = currentUserContext.currentLanguage[0];
+
+    const projectImages = [
+        { src: `${BASE_URL}/assets/images/agenda-cac01.jpg`, alt: "captura de Agenda de contactos con node.js" },
+        { src: `${BASE_URL}/assets/images/agenda-cac02.jpg`, alt: "captura de Agenda de contactos con node.js" },
+        { src: `${BASE_URL}/assets/images/agenda-cac03.jpg`, alt: "captura de Agenda de contactos con node.js" },
+        { src: `${BASE_URL}/assets/images/agenda-cac04.jpg`, alt: "captura de Agenda de contactos con node.js" }
+      ];
     console.log(`Viendo el proyecto con id ${id} y nombre ${projectName}`);
     return (
         <>
@@ -55,22 +64,8 @@ const ViewProject = (props) => {
                 <section className="project">
                     {/* PROJECT PAGE FIRST SECTION */}
                     <section className="project_first_section" id="project_first_section">
-                        {/* empieza la imagen y los thumbnails */}
-                        <div className="slider-container">
-                        <div className="slider-wrapper">
-                            <img src="/assets/images/agenda-cac01.jpg" alt="captura de Agenda de contactos con node.js" />
-                            <img src="/assets/images/agenda-cac02.jpg" alt="captura de Agenda de contactos con node.js" />
-                            <img src="/assets/images/agenda-cac03.jpg" alt="captura de Agenda de contactos con node.js" />
-                            <img src="/assets/images/agenda-cac04.jpg" alt="captura de Agenda de contactos con node.js" />
-                        </div>
-                        <div className="thumbnail-wrapper">
-                            <img src="/assets/images/agenda-cac01.jpg" alt="captura de Agenda de contactos con node.js" className="thumbnail" />
-                            <img src="/assets/images/agenda-cac02.jpg" alt="captura de Agenda de contactos con node.js" className="thumbnail" />
-                            <img src="/assets/images/agenda-cac03.jpg" alt="captura de Agenda de contactos con node.js" className="thumbnail" />
-                            <img src="/assets/images/agenda-cac04.jpg" alt="captura de Agenda de contactos con node.js" className="thumbnail" />
-                        </div>
-                        </div>
-                        {/* termina la imagen y los thumbnails */}
+                        
+                        <ProjectSlider images={projectImages}></ProjectSlider>
 
                         <div className="project_first_section__links">
                         <a href="https://github.com/hernanruscica/integrador_cac_alumnos" target="_blank" className="project_first_section_link" rel="noopener noreferrer">

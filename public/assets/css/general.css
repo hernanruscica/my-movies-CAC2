@@ -1,4 +1,6 @@
 /* General Styles starts*/
+
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
 :root{
     /*Basic colors*/
     --midnight-green: hsl(195, 83%, 16%);
