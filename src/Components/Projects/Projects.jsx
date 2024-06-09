@@ -1,49 +1,24 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import './Projects.css';
-import {fetchProjectsData, fetchTagsData} from '../utils/fetchsAxios.js';
 import Card from '../Card/Card.jsx';
+import { ProjectsContext } from '../../Contexts/ProjectsProvider.jsx';
 
 const Projects = () => {
 
-  const [projects, setProjects] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+ 
   const [currentPage, setCurrentPage] = useState(1);
   const [projectsPerPage, setProjectsPerPage] = useState(3);
   const [searchTerm, setSearchTerm] = useState('');    
-  const [searchTag, setSearchTag] = useState('');  
-  const [tags, setTags] = useState([]);
+  const [searchTag, setSearchTag] = useState('');   
   const [searchOrder, setSearchOrder] = useState('oldest');
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try{
-        const projectsData = await fetchProjectsData();        
-        setProjects(projectsData);
-        const tags = await fetchTagsData();
-        setTags(tags);
-        setError(null);        
-      }catch(error){
-        setError('Error al obtener el proyecto');
-        console.error('Error al obtener el proyecto', error);
-      }
-      setLoading(false);
-    };
-    
-    fetchProjects();    
-          
-  }, []);   
   
+  const projectsCtx = useContext(ProjectsContext)
+  const projects = projectsCtx.projects;
+  const tags = projectsCtx.tags;
   
-  //console.log(projects);
   // Obtener proyectos actuales
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-  
-  
-
-  
-
 
   //Filtrar proyectos por el titulo, devuelvo los proyectos que tienen el titulo coincidente.
   const projectsFiltered = projects.filter((project) => {
@@ -68,14 +43,7 @@ const Projects = () => {
   const currentProjects = projectsFiltered.slice(indexOfFirstProject, indexOfLastProject);
   const totalPages =  Math.ceil(projectsFiltered.length / projectsPerPage);
 
-  if (loading) {
-    return <div>Cargando...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-//console.log(projectsSorted);
+  
   return (
     <>
       <a href="#" className="btn btn-floating top_arrow" id="top_arrow">

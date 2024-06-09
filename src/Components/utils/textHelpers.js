@@ -1,0 +1,1 @@
+export const makeUrlFriendly = (title) => title.toLowerCase().replace(/ /g, '-').replace(/[.,'"`]/g, '');

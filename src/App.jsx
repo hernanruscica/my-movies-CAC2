@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { UserProvider } from './Contexts/UserProvider.jsx';
+import { ProjectsContext, ProjectsProvider } from './Contexts/ProjectsProvider.jsx';
 
 import Header from './Components/Header/Header.jsx';
 import About from './Components/About/About.jsx';
@@ -15,20 +16,24 @@ import Footer from './Components/Footer/Footer.jsx';
 function App() {
   return (
     <UserProvider>
-      <Router>
-        <div className="app">        
-          <Header  />
-          <Routes>
-            <Route path="/" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/22"  element={<ViewProject id="22" projectName="Agenda"/>} /> 
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/links" element={<Links />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-          <Footer />          
-        </div>
-      </Router>
+      <ProjectsProvider>
+        <Router>
+          <div className="app">        
+            <Header />
+            <Routes>
+              <Route path="/" element={<About />} />
+              
+              <Route path="/projects" element={<Projects />} />                           
+              <Route path="/projects/:titulo" element={<ViewProject />} />
+
+              <Route path="/skills" element={<Skills />} />
+              <Route path="/links" element={<Links />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+            <Footer />
+          </div>
+        </Router>
+      </ProjectsProvider>
     </UserProvider>
   );
 }

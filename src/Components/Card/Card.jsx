@@ -1,6 +1,9 @@
 import React from 'react';
 import {dateToString} from '../utils/dateHelpers.js';
 
+import {makeUrlFriendly} from '../utils/textHelpers.js'
+
+
 const Card = (props) => {
     const {linkUrl, id, img, title, tags, setSearchTag, date} = props;
 
@@ -17,7 +20,7 @@ const Card = (props) => {
           alt="captura de Juego de memoria 'Memotest"
         />
         <a
-          href={'/' + linkUrl + '/' + id}
+          href={'/' + linkUrl + '/' + makeUrlFriendly(title)}
           className="btn recentprojects-project__btn"
         >
           Ver más
