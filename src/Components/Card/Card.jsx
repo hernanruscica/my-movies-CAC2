@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {Link} from 'react-router-dom';
 import {dateToString} from '../utils/dateHelpers.js';
 
 import {makeUrlFriendly} from '../utils/textHelpers.js'
+import { UserContext } from '../../Contexts/UserProvider';
 
 
 const Card = (props) => {
     const {linkUrl, id, img, title, tags, setSearchTag, date} = props;
 
     const dateToShow = dateToString(date);
+
+    const currentUserContext = useContext(UserContext);          
+    //const currentPage = currentUserContext.currentPage[0];
+    const setCurrentPage = currentUserContext.currentPage[1];
 
     
 
@@ -19,12 +25,13 @@ const Card = (props) => {
           src={img}
           alt="captura de Juego de memoria 'Memotest"
         />
-        <a
-          href={'/' + linkUrl + '/' + makeUrlFriendly(title)}
+        <Link
+          to={'/' + linkUrl + '/' + makeUrlFriendly(title)}
           className="btn recentprojects-project__btn"
+          onClick={() => setCurrentPage("projects")} 
         >
           Ver más
-        </a>
+        </Link>
       </div>
 
       <div className="recentprojects-project-info">

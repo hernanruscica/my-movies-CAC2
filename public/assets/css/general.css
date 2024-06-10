@@ -151,33 +151,35 @@ body{
 }
 
 .breadcrumb {
-    padding-left: 4rem;
+    padding-left: 0rem;
 }
 
 .breadcrumb ul {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;    
     list-style: none;
-    gap: 0.5em;
-    margin: 0em 0 1em 0em ;
-    padding: 2em 0 0 0 ;    
+    gap: 0.8em;    
+    padding: 1em 0;    
 }
 
-.breadcrumb li{
-    font-size: 1.2em;
+.breadcrumb li{    
+    
+    font-size: 1em;
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     font-size: 1em;    
 }
 .breadcrumb a {
+    display: flex;    
+    align-items: center;
+    gap: 0.2em;
     color: var(--section01-normal);
-}
-    
-.breadcrumb li:not(:last-child)::after {
-    display: inline-block;
-    margin: 0 .25rem;
-    content: "→";
+}    
+.breadcrumb button {
+    padding: 0.5em 1em;
+    background-color: rgba(24, 24, 24, 0.2);
 }
 
 .container{    

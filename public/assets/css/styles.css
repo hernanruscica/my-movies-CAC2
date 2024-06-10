@@ -134,11 +134,11 @@ body{
     color: var(--section01-normal);
 }
     
-.breadcrumb li:not(:last-child)::after {
+/* .breadcrumb li:not(:last-child)::after {
     display: inline-block;
     margin: 0 .25rem;
     content: "→";
-}
+} */
 
 
 /* General Styles ends*/

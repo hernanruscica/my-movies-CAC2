@@ -1,5 +1,5 @@
-import React, {useState, useContext} from 'react'
-import { Link } from 'react-router-dom';
+import React, {useState, useContext, useEffect} from 'react'
+import { Link, useLocation  } from 'react-router-dom';
 import './Header.css';
 import { UserContext } from '../../Contexts/UserProvider';
 import { BASE_URL } from '../../config';
@@ -12,6 +12,13 @@ export const Header = () => {
   const currentLanguage = currentUserContext.currentLanguage[0];
   const onLanguageChange = currentUserContext.currentLanguage[1];
 
+  const location = useLocation();
+
+  useEffect(() => {
+    const path = location.pathname.split('/')[1];    
+    onPageChange(path);
+  }, [location, onPageChange]);
+
   //console.log(currentPage);
     const isActive = (pageName) => {
       return currentPage === pageName ? 'navbar-selected': '';
@@ -19,6 +26,7 @@ export const Header = () => {
 
     const handleNavbarClick = (pageName) => {      
       document.getElementById("menu-toggle").click();
+      console.log(pageName);
       onPageChange(pageName);
     };
     const handleLanguageChange = (e) => {
@@ -67,7 +75,7 @@ export const Header = () => {
             </label>
             <ul className="header__navbar-mobile__list">
               <li className="header__navbar-mobile__list__item">                
-                  <Link to="/" 
+                  <Link to="/about" 
                   className={`header__navbar-mobile__link ${isActive(
                     "about"
                   )}`}
