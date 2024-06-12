@@ -26,7 +26,7 @@ export const Header = () => {
 
     const handleNavbarClick = (pageName) => {      
       document.getElementById("menu-toggle").click();
-      console.log(pageName);
+      //console.log(pageName);
       onPageChange(pageName);
     };
     const handleLanguageChange = (e) => {

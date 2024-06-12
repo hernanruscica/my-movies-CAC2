@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import './Projects.css';
 import Card from '../Card/Card.jsx';
 import { ProjectsContext } from '../../Contexts/ProjectsProvider.jsx';
+import { Breadcumb } from '../Header/Breadcumb.jsx';
 
 const Projects = () => {
 
@@ -53,33 +54,10 @@ const Projects = () => {
           alt="icono de flecha para arriba"
           style={{ height: "35px", width: "35px" }}
         />
-      </a>
-
-      <a
-        href="javascript:window.history.back();"
-        className="btn btn-floating left_arrow"
-        id="left_arrow"
-      >
-        <img
-          src="../assets/icons/fontawesome-custom/arrow-left.svg"
-          className="left_arrow_icon"
-          alt="icono de flecha para la izquierda"
-          style={{ height: "35px", width: "35px" }}
-        />
-      </a>
+      </a>      
 
       <main className="project-main container">
-        <nav aria-label="Breadcrumb" className="breadcrumb">
-          <ul>
-            <li key={'home'}>
-              <a href="../index.html">Home</a>
-            </li>
-            <li key={'projects'}>
-              <span aria-current="page">proyectos</span>
-            </li>
-          </ul>
-        </nav>
-      
+        <Breadcumb currentPageName=''/>      
       
       <section className="project">
 

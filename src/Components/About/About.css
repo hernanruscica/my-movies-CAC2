@@ -3,13 +3,13 @@
 .aboutme{
     
     background-color: var(--section01-light);
-    padding-top: 4em;
+    padding-top: 1em;
 }
 
 .aboutme-main__title{
     position: absolute;
     width: 100%;
-    top: 4rem;
+    top: 1rem;
     text-align: center;    
 }
 .aboutme-main{
@@ -19,7 +19,7 @@
     color: var(--section01-dark);
     padding: 1rem;
     gap: 1.4rem;
-    padding-top: 4.5rem;
+    padding-top: 1rem;
 }
 
 .aboutme-main__column{

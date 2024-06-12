@@ -42,7 +42,7 @@ const ViewProject = () => {
              </a>             
              <main className="project-main container">                 
                  
-                 <Breadcumb currentPage = {currentPage} projectName ={projectName} currentLanguage={currentLanguage}></Breadcumb> 
+                 <Breadcumb currentPageName = {projectName} ></Breadcumb> 
 
                  <section className="project">
                      {/* PROJECT PAGE FIRST SECTION */}

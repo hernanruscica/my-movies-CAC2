@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react'
 import './About.css';
 import './Section.css';
 import { UserContext } from '../../Contexts/UserProvider';
+import { Breadcumb } from '../Header/Breadcumb';
 
 export const About = () => {
   const currentUserContext = useContext(UserContext);    
@@ -11,6 +12,7 @@ export const About = () => {
 
   return (
     <section className="container section aboutme-main" id="aboutme">
+      <Breadcumb currentPageName='' />
       <div className="section__image__container">
         <img
           className="section_image"

@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react'
 import './myskills.css';
 import './Section.css';
 import { UserContext } from '../../Contexts/UserProvider';
+import { Breadcumb } from '../Header/Breadcumb.jsx';
 
 const Skills = () => {
   const currentUserContext = useContext(UserContext);    
@@ -17,31 +18,10 @@ const Skills = () => {
           style={{ height: "35px", width: "35px" }}
         />
       </a>
-
-      <a
-        href="javascript:window.history.back();"
-        className="btn btn-floating left_arrow"
-        id="left_arrow"
-      >
-        <img
-          src="../assets/icons/fontawesome-custom/arrow-left.svg"
-          className="left_arrow_icon"
-          alt="icono de flecha para la izquierda"
-          style={{ height: "35px", width: "35px" }}
-        />
-      </a>
+     
 
       <main className="myskills container">
-        <nav aria-label="Breadcrumb" className="breadcrumb">
-            <ul>
-              <li key={'home'}>
-                <a href="/">Home</a>
-              </li>
-              <li key={'projects'}>
-                <span aria-current="page">{currentTitle}</span>
-              </li>
-            </ul>
-        </nav>
+        <Breadcumb currentPageName='' />
         <div className="myskills_showcase">
           <img
             src="./assets/icons/html-5-svgrepo-com.svg"

@@ -1,22 +1,28 @@
 
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import React, {useState} from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { BASE_URL } from '../../config';
 
 
 
 export const Breadcumb = (props) => {
-    //Back Home CurrentPage
+    //Back Home CurrentPage  
+    const {currentPageName} = props;  
 
+    //const [links, setLinks] = useState()
+
+    const location = useLocation();
+    const path = location.pathname.split('/')[1];  
+
+    console.log(path)
     
-
-    const { currentPage, projectName, currentLanguage} = props;
     const navigate = useNavigate();
     const handleBack = () => {
         //console.log("back");
         navigate(-1);
     }
 
+    
     const LeftArrow = () => (
         <button onClick={handleBack}>
         <img 
@@ -35,8 +41,7 @@ export const Breadcumb = (props) => {
     );
     
   return (
-    <>
-      
+    <>      
       <nav aria-label="Breadcrumb" className="breadcrumb">
         <ul>
             <li key={"back"}>
@@ -48,14 +53,14 @@ export const Breadcumb = (props) => {
             <RightArrow />
             </Link> 
           </li>
-          <li key={`${currentPage}`}>
-            <Link to={`/${currentPage}`}>
-              <span>{currentLanguage == "esp" ? "Proyectos" : currentPage}</span> 
+          <li key={path}>
+            <Link to={BASE_URL+path}>
+              <span>{path}</span>               
               <RightArrow />
             </Link>
           </li>
           <li key={"project-details"}>
-            {<span aria-current="page">{projectName}</span>}
+            {<span aria-current="page">{currentPageName}</span>}
           </li>
         </ul>
       </nav>
