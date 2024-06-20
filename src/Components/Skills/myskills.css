@@ -3,7 +3,7 @@
 .myskills{
     background-color: var(--section03-light);
     flex-direction: column-reverse;
-    padding: 0em 1.2em;
+    padding: 1em 1.6em;
 }
 
 .myskills-main {

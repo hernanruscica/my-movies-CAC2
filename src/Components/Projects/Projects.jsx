@@ -3,6 +3,8 @@ import './Projects.css';
 import Card from '../Card/Card.jsx';
 import { ProjectsContext } from '../../Contexts/ProjectsProvider.jsx';
 import { Breadcumb } from '../Header/Breadcumb.jsx';
+import { BASE_URL } from '../../config';
+import { UserContext } from '../../Contexts/UserProvider';
 
 const Projects = () => {
 
@@ -16,6 +18,10 @@ const Projects = () => {
   const projectsCtx = useContext(ProjectsContext)
   const projects = projectsCtx.projects;
   const tags = projectsCtx.tags;
+
+  const currentUserContext = useContext(UserContext);    
+  let currentLanguage = currentUserContext.currentLanguage[0];
+  let currentTitle = ( currentLanguage == 'esp') ? 'Proyectos.' : 'Projects';
   
   // Obtener proyectos actuales
   const indexOfLastProject = currentPage * projectsPerPage;
@@ -57,7 +63,10 @@ const Projects = () => {
       </a>      
 
       <main className="project-main container">
-        <Breadcumb currentPageName=''/>      
+        <Breadcumb currentPageName=''/>    
+        <div class="section__title__container"><img src={`${BASE_URL}/assets/icons/tactic_FILL0_wght300_GRAD0_opsz24.svg`} class="myskills__section__icon" alt="icono de usuario" />
+          <h2 class="section_title">{currentTitle}</h2>
+        </div>   
       
       <section className="project">
 
