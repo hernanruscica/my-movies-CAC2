@@ -5,11 +5,12 @@ CONTACTME SECTION starts
 
 input, textarea {
     all: unset;
-  }
+}
 
 .contactme{
-    flex-direction: column;
-    background-color: var(--section01-light);
+    flex-direction: column;    
+    background-color: var(--section05-light);
+    color: var(--section05-dark);   
 }
 
 .contactme-form{       

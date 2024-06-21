@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { UserProvider } from './Contexts/UserProvider.jsx';
-import { ProjectsContext, ProjectsProvider } from './Contexts/ProjectsProvider.jsx';
+import { ProjectsProvider } from './Contexts/ProjectsProvider.jsx';
 
 import Header from './Components/Header/Header.jsx';
 import About from './Components/About/About.jsx';
@@ -24,7 +24,6 @@ function App() {
               <Route path="/about" element={<About />} />                       
               <Route path="/projects" element={<Projects />} />                           
               <Route path="/projects/:titulo" element={<ViewProject />} />
-
               <Route path="/skills" element={<Skills />} />
               <Route path="/links" element={<Links />} />
               <Route path="/contact" element={<Contact />} />

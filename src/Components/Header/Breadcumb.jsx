@@ -2,6 +2,7 @@
 import React, {useState} from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { BASE_URL } from '../../config';
+import './Breadcumb.css';
 
 
 
@@ -26,7 +27,7 @@ export const Breadcumb = (props) => {
     const LeftArrow = () => (
         <button onClick={handleBack}>
         <img 
-          src={`${BASE_URL}/assets/icons/fontawesome-custom/arrow-left.svg`} 
+          src={`${BASE_URL}./../assets/icons/fontawesome-custom/arrow-left.svg`} 
           alt="left arrow icon" 
           style={{ width: '16px' }} 
         />
@@ -34,7 +35,7 @@ export const Breadcumb = (props) => {
       );
     const RightArrow = () => (
     <img 
-        src={`${BASE_URL}/assets/icons/fontawesome-custom/arrow-left.svg`} 
+        src={`${BASE_URL}./../assets/icons/fontawesome-custom/arrow-left.svg`} 
         alt="right arrow icon" 
         style={{ width: '16px', transform: 'rotate(180deg)' }} 
     />
@@ -54,7 +55,7 @@ export const Breadcumb = (props) => {
             </Link> 
           </li>
           <li key={path}>
-            <Link to={BASE_URL+path}>
+            <Link to={path}>
               <span>{path}</span>               
               <RightArrow />
             </Link>

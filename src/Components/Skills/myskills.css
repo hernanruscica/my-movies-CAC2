@@ -1,18 +1,12 @@
 /*Myskills starts*/
 
 .myskills{
-    background-color: var(--section03-light);
+    background-color: var(--section02-light);  
+    color: var(--section02-dark);    
     flex-direction: column-reverse;
     padding: 1em 1.6em;
 }
 
-.myskills-main {
-    background-color: var(--section03-light);
-}
-
-.myskills__section{
-    
-}
 /*Slider con las tecnologias*/
 .myskills_showcase{
     background-color: #fff;

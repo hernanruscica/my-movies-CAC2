@@ -1,0 +1,32 @@
+.breadcrumb {
+    padding-left: 0rem;
+    width: 100%;
+}
+
+.breadcrumb ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;    
+    list-style: none;
+    gap: 0.8em;    
+    padding: 1em 0;    
+}
+
+.breadcrumb li{    
+    
+    font-size: 1em;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1em;    
+}
+.breadcrumb a {
+    display: flex;    
+    align-items: center;
+    gap: 0.2em;
+    color: var(--section01-normal);
+}    
+.breadcrumb button {
+    padding: 0.5em 1em;
+    background-color: rgba(24, 24, 24, 0.2);
+}

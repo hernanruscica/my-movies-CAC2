@@ -1,54 +1,94 @@
 /*Aboutme starts*/
-
-.aboutme{
-    
+.aboutme {    
     background-color: var(--section01-light);
-    padding-top: 1em;
+    color: var(--section01-dark);   
 }
-
-.aboutme-main__title{
+.aboutme-main__title {
     position: absolute;
     width: 100%;
     top: 1rem;
-    text-align: center;    
-}
-.aboutme-main{
-    display: flex;
-    flex-direction: column;
-    background-color: var(--section01-light); 
-    color: var(--section01-dark);
-    padding: 1rem;
-    gap: 1.4rem;
-    padding-top: 1rem;
+    text-align: center;
 }
 
-.aboutme-main__column{
+.aboutme-main__column {
     padding: 0rem;
 }
-
-.aboutme-main__column__paragraph{
+.aboutme-main__column__paragraph {
     line-height: 1.6rem;
     letter-spacing: 0.02rem;
     font-weight: 300;
 }
-
-.aboutme-main__link{    
+.aboutme-main__link {
     color: var(--section02-normal);
-    word-break:keep-all;
+    word-break: keep-all;
     font-weight: 700;
 }
 
-
-@media (min-width: 1000px){
-    
-    .aboutme-main {
-        flex-direction: column;
-        justify-content: space-between;
-        
-    }
-    .aboutme-main__column{
-        width: 30%;
-    }
+.aboutme__image__container{
+    width: 100%;
+    min-width: 300px;
+    /* max-width: 400px; */
+    position: relative;
+    display: flex;
+    align-self: center;    
+}
+.aboutme_image{
+    width: 100%;
+    /* min-width: 300px; */
+    /* max-width: 400px; */
+    height: 240px;
+    object-fit: cover;
+    object-position: center;
+    border: #000000 solid 2px;
 }
 
+.aboutme_image__container-btn-download{
+    position: absolute;    
+    bottom: 0px;
+    right: 0px;
+    border: var(--section04-dark) solid 2px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius:  5px 0 0 0;
+    border-bottom: none;
+    border-right: none;   
+    width: auto;  
+    padding: 0.5;  
+}
+.aboutme__btn__icon {
+    width: 20px;
+    height: 20px;
+}
+
+/*view for bigger viewports */
+@media (min-width: 1000px) {
+    .aboutme {
+        flex-direction: column;
+        justify-content: space-between;
+
+    }
+    .aboutme-main__column {
+        width: 30%;
+    }
+    
+    .aboutme__title__container {
+        width: 80%;
+    }
+    .aboutme_title {
+        width: 50%;
+    }
+    .aboutme__image__container {
+        width: 100%;
+    }
+    .aboutme__textcontent__more {
+        width: 60%;
+        padding: 4em 1.2em 0.8em 1.2em;
+        align-self: flex-start;
+        justify-content: left;
+    }
+    .aboutme__image__container{
+        width: 100%;       
+    }
+    
+
+}
 /*Aboutme ends*/

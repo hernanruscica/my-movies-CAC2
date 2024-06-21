@@ -10,9 +10,10 @@ export const Links = () => {
   let currentLanguage = currentUserContext.currentLanguage[0];
   let currentTitle = ( currentLanguage == 'esp') ? 'Enlaces.' : 'Links';
   return (
-    <main className="myskills container">
+    <main className="container section links">
         <Breadcumb currentPageName='' />
-        <div class="section__title__container"><img src={`${BASE_URL}/assets/icons/link-solid.svg`} className="myskills__section__icon" alt="icono de usuario" />
+        <div className="section__title__container"><img src={`${BASE_URL}/assets/icons/link-solid.svg`} 
+          className="section__title__container__icon" alt="icono de usuario" />
           <h2 className="section_title">{currentTitle}</h2>
         </div>  
         <div className="section__description__container">                

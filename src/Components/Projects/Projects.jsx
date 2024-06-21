@@ -51,105 +51,129 @@ const Projects = () => {
   const totalPages =  Math.ceil(projectsFiltered.length / projectsPerPage);
 
   
-  return (
-    <>
-      <a href="#" className="btn btn-floating top_arrow" id="top_arrow">
-        <img
-          src="../assets/icons/fontawesome-custom/arrow-up.svg"
-          className="top_arrow_icon"
-          alt="icono de flecha para arriba"
-          style={{ height: "35px", width: "35px" }}
-        />
-      </a>      
-
-      <main className="project-main container">
-        <Breadcumb currentPageName=''/>    
-        <div class="section__title__container"><img src={`${BASE_URL}/assets/icons/tactic_FILL0_wght300_GRAD0_opsz24.svg`} class="myskills__section__icon" alt="icono de usuario" />
-          <h2 class="section_title">{currentTitle}</h2>
-        </div>   
-      
-      <section className="project">
-
-        {/*searchBar, filter, order and pagination STARTS */}
-        <div className="project__searchbar__container">
-          <input className="project__searchbar__container__input_text"
-            type="text"
-            placeholder="Buscar proyectos..."
-            value={searchTerm}
-            onChange={(e) => {
+  return (    
+    <section className="container section project">
+      <Breadcumb currentPageName="" />
+      <div className="section__sidetext__container">
+        <div className="section__title__container">
+          <img
+            src={`${BASE_URL}/assets/icons/tactic_FILL0_wght300_GRAD0_opsz24.svg`}
+            className="section__title__container__icon"
+            alt="icono de proyecto"
+          />
+          <h2 className="section_title">{currentTitle}</h2>
+        </div>
+        <section className="section__description__container">
+          {/*searchBar, filter, order and pagination STARTS */}
+          <div className="project__searchbar__container">
+            <input
+              className="project__searchbar__container__input_text"
+              id='searchProjectInput'
+              type="text"
+              placeholder="Buscar proyectos..."
+              value={searchTerm}
+              onChange={(e) => {
                 setSearchTerm(e.target.value);
                 setCurrentPage(1);
               }}
-          />
-          <select
-            className="project__searchbar__container__input_combo"
-            value={searchTag}
-            onChange={(e) => {
+            />
+            <select
+              className="project__searchbar__container__input_combo"
+              id='selectTagInput'
+              value={searchTag}
+              onChange={(e) => {
                 setSearchTag(e.target.value);
                 setCurrentPage(1);
               }}
-          >            
-            <option value="">Etiqueta: Ninguna</option>
-            {tags.map((tag) => (
-              <option key={tag.id} value={tag.name}>{tag.name}</option>
+            >
+              <option value="">Etiqueta: Ninguna</option>
+              {tags.map((tag) => (
+                <option key={tag.id} value={tag.name}>
+                  {tag.name}
+                </option>
+              ))}
+            </select>
+            <div className='project__searchbar__container__order__container'>
+              <label className={`project__searchbar__container__order__container__btn ${searchOrder === 'newest' ? 'project__searchbar__container__order__container__btn--selected' : ''}`}>
+                <input
+                  className="project__searchbar__container__input_checkbox"
+                  id='checkOrderNewerInput'
+                  type="checkbox"
+                  value="newest"
+                  checked={searchOrder === "newest"} // Verifica si la opción más reciente está seleccionada
+                  onChange={(e) => {
+                    setSearchOrder(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                />
+                <img
+                  src={`${BASE_URL}/assets/icons/arrow-down-wide-short-solid.svg`}
+                  className="project__searchbar__container__order__container__icon"
+                  alt="icono de orden descendente"
+                /> <span>Nuevos</span>
+              </label>
+              <label className={`project__searchbar__container__order__container__btn ${searchOrder === 'oldest' ? 'project__searchbar__container__order__container__btn--selected' : ''}`}>
+                <input
+                  className="project__searchbar__container__input_checkbox"
+                  id='checkOrderOlderInput'
+                  type="checkbox"
+                  value="oldest"
+                  checked={searchOrder === "oldest"} // Verifica si la opción más antigua está seleccionada
+                  onChange={(e) => setSearchOrder(e.target.value)}
+                />
+                <img
+                  src={`${BASE_URL}/assets/icons/arrow-down-short-wide-solid.svg`}
+                  className="project__searchbar__container__order__container__icon"
+                  alt="icono de orden descendente"
+                /> 
+                <span>Antiguos</span> 
+              </label>
+            </div>
+            <div className='project__searchbar__container__order__container'>
+              <div>Paginas:</div> 
+              {/* <span>Página actual: {currentPage}</span> */}
+              <div className='project__searchbar__container__page-container'>
+                {Array.from({ length: totalPages }, (_, index) => {
+                  return (
+                    <span
+                      key={index + 1}
+                      style={{
+                        fontWeight: currentPage === index + 1 ? "bold" : "normal",
+                        textDecoration:
+                          currentPage === index + 1 ? "none" : "underline",
+                        cursor: currentPage === index + 1 ? "default" : "pointer",
+                        fontSize: currentPage === index + 1 ? "1.8em" : "1.6em", // Tamaño mayor para la página actual
+                      }}
+                      onClick={() => setCurrentPage(index + 1)}
+                    >
+                      {index + 1}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+          {/*searchBar, filter, order and pagination ENDS */}
+
+          <div className="recentprojects__container" id="projects_container">
+            {currentProjects.map((project, index) => (
+              //linkUrl, id, img, title, tags, setSearchTag, date
+              <div key={index}>
+                <Card
+                  linkUrl="projects"
+                  id={project.id}
+                  img={project.acf.image02}
+                  title={project.acf.project_title}
+                  tags={project.acf.tags}
+                  setSearchTag={setSearchTag}
+                  date={project.date}
+                />
+              </div>
             ))}
-          </select>
-          <div>
-            <label>
-              <input className="project__searchbar__container__input_checkbox"
-                type="checkbox"
-                value="newest"
-                checked={searchOrder === 'newest'} // Verifica si la opción más reciente está seleccionada
-                onChange={(e) => {
-                  setSearchOrder(e.target.value);
-                  setCurrentPage(1);
-                }}
-              />
-              Más recientes
-            </label>
-            <label>
-              <input className="project__searchbar__container__input_checkbox"
-                type="checkbox"
-                value="oldest"
-                checked={searchOrder === 'oldest'} // Verifica si la opción más antigua está seleccionada
-                onChange={(e) => setSearchOrder(e.target.value)}
-              />
-              Más antiguos
-            </label>
           </div>
-          <div>
-            Paginas: 
-            {/* <span>Página actual: {currentPage}</span> */}
-            { Array.from({ length: totalPages }, (_, index) => {                
-                return (<span key={index + 1} 
-                        style={{
-                          fontWeight: currentPage === index + 1 ? 'bold' : 'normal',
-                          textDecoration: currentPage === index + 1 ? 'none' : 'underline',
-                          cursor: currentPage === index + 1 ? 'default' : 'pointer',
-                          fontSize: currentPage === index + 1 ? '1.6em' : '1.2em', // Tamaño mayor para la página actual
-                        }}                        
-                        onClick={() => setCurrentPage(index + 1)}>
-                  {index + 1}
-                </span>)
-               })
-            }           
-          </div>
-        </div>
-        {/*searchBar, filter, order and pagination ENDS */}
-        
-        <div className="recentprojects__container" id="projects_container">
-          {currentProjects.map((project, index) => (     
-            //linkUrl, id, img, title, tags, setSearchTag, date
-            <div key={index}>
-            <Card linkUrl = 'projects' id = {project.id} img = {project.acf.image02} 
-                  title = {project.acf.project_title} tags = {project.acf.tags} 
-                  setSearchTag = {setSearchTag} date = {project.date} />              
-            </div>            
-      ))}
-          </div>
-        </section>  
-      </main>
-    </>
+        </section>
+      </div>
+    </section>    
   );
 }
 

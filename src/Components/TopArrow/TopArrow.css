@@ -1,0 +1,46 @@
+/* Top arrow styles starts*/
+
+.btn-floating{
+    position: fixed;
+    padding: 0.7em 1em;
+    border-radius: 5px;
+    font-size: 0.7em;
+    border: #073b4c solid 2px;
+    color: var(--midnight-green);
+    background-color: var(--gray-light);
+    z-index: 4;
+    text-decoration: none;
+}
+
+.top_arrow{    
+    bottom: 8vh;
+    right: 1.7em;    
+    padding: 0.8em 0.5em;
+    opacity: 0;
+    transform: scale(0);
+    transition-property: transform, opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out    
+}
+.top_arrow_show{
+    opacity: 0.5;
+    transform: scale(1);
+
+    transition-property: transform, opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out
+}
+
+.top_arrow_icon {    
+    height: 35px;    
+    width: 35px;
+}
+
+@media (min-width: 800px){
+    .top_arrow{
+        right: 4vw;
+        font-size: 1em;
+    }
+}
+
+/* Top arrow styles ends*/
